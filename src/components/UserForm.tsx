@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import type { UserForm } from "../models/FormData";
-import type { FormErrors } from "./FormErrors";
-import { Alert, Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
+import type { FormErrors } from "../models/FormErrors";
+import {
+  Alert,
+  Avatar,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 
 export default function UserForm() {
   const [formData, setFormData] = useState<UserForm>({
@@ -59,75 +67,80 @@ export default function UserForm() {
   };
 
   return (
-    <div className="container">
-      <form className="formulario" onSubmit={botonRegistrar}>
-        <h2>Registro de Usuario</h2>
+    <div className="contenedor-flex">
+      <div className="container">
+        <form className="formulario" onSubmit={botonRegistrar}>
+          <h2>Registro de Usuario</h2>
 
-        <label htmlFor="name">Nombre:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Juan Pérez"
-          className={errors.name ? "error" : ""}
-          value={formData?.name}
-          onChange={obtenerInformacion}
-          onBlur={obtenerErrores}
-          required
-        />
-        <span className="error-text">{errors.name}</span>
+          <label htmlFor="name">Nombre:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Juan Pérez"
+            className={errors.name ? "error" : ""}
+            value={formData?.name}
+            onChange={obtenerInformacion}
+            onBlur={obtenerErrores}
+            required
+          />
+          <span className="error-text">{errors.name}</span>
 
-        <label htmlFor="cellphone">Celular:</label>
-        <input
-          type="text"
-          id="cellphone"
-          name="cellphone"
-          placeholder="3123456789"
-          value={formData?.cellphone}
-          onChange={obtenerInformacion}
-          onBlur={obtenerErrores}
-        />
+          <label htmlFor="cellphone">Celular:</label>
+          <input
+            type="text"
+            id="cellphone"
+            name="cellphone"
+            placeholder="3123456789"
+            value={formData?.cellphone}
+            onChange={obtenerInformacion}
+            onBlur={obtenerErrores}
+          />
 
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="juanperez@"
-          className={errors.email ? "error" : ""}
-          value={formData?.email}
-          onChange={obtenerInformacion}
-          onBlur={obtenerErrores}
-          required
-        />
-        <span className="error-text">{errors.email}</span>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="juanperez@"
+            className={errors.email ? "error" : ""}
+            value={formData?.email}
+            onChange={obtenerInformacion}
+            onBlur={obtenerErrores}
+            required
+          />
+          <span className="error-text">{errors.email}</span>
 
-        <label htmlFor="password">Contraseña:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="********"
-          className={errors.password ? "error" : ""}
-          value={formData?.password}
-          onChange={obtenerInformacion}
-          onBlur={obtenerErrores}
-          required
-        />
-        <span className="error-text">{errors.password}</span>
+          <label htmlFor="password">Contraseña:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="********"
+            className={errors.password ? "error" : ""}
+            value={formData?.password}
+            onChange={obtenerInformacion}
+            onBlur={obtenerErrores}
+            required
+          />
+          <span className="error-text">{errors.password}</span>
 
-        <div className="botones">
-          <button type="button" className="cancelar">
-            Cancelar
-          </button>
-          <button type="submit" className="registrar">
-            Registrar
-          </button>
-        </div>
+          <div className="botones">
+            <button type="button" className="cancelar">
+              Cancelar
+            </button>
+            <button type="submit" className="registrar">
+              Registrar
+            </button>
+          </div>
 
-        <p className="nota">Completa todos los campos para registrarte</p>
+          <p className="nota">Completa todos los campos para registrarte</p>
+        </form>
+      </div>
 
+      
         {alert && (
+          <div className="container">
           <React.Fragment>
             <Alert severity="success">
               'El usuario {formData.name} se ha registrado con exito'
@@ -138,7 +151,10 @@ export default function UserForm() {
             >
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                  <Avatar alt={formData?.name} src="/static/images/avatar/1.jpg" />
+                  <Avatar
+                    alt={formData?.name}
+                    src="/static/images/avatar/1.jpg"
+                  />
                 </ListItemAvatar>
                 <ListItemText
                   primary={formData?.name}
@@ -152,16 +168,17 @@ export default function UserForm() {
                         {formData?.email}
                       </Typography>
                       <br />
-                      {formData?.cellphone ? `Celular: ${formData.cellphone}` : "Celular no proporcionado"}
+                      {formData?.cellphone
+                        ? `Celular: ${formData.cellphone}`
+                        : "Celular no proporcionado"}
                     </React.Fragment>
                   }
                 />
               </ListItem>
             </List>
           </React.Fragment>
+          </div>
         )}
-      
-      </form>
-    </div>
+      </div>
   );
 }
